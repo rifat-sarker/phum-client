@@ -1,23 +1,33 @@
-import { Layout, Menu } from "antd";
+import { Layout, Menu, MenuProps } from "antd";
 
 const { Header, Content, Footer, Sider } = Layout;
-const items = [
+const items: MenuProps["items"] = [
   {
-    key: "dfdsf",
+    key: "1",
     label: "Home",
   },
   {
-    key: "dfdfsf",
+    key: "2",
     label: "About",
   },
   {
-    key: "dfdddsf",
-    label: "Contact",
+    key: "3",
+    label: "User Manageqment",
+    children: [
+      {
+        key: "11",
+        label: "Admin",
+      },
+      {
+        key: "12",
+        label: "Student",
+      },
+    ],
   },
 ];
 const MainLayout = () => {
   return (
-    <Layout>
+    <Layout style={{ height: "100vh" }}>
       <Sider
         breakpoint="lg"
         collapsedWidth="0"
@@ -28,8 +38,16 @@ const MainLayout = () => {
           console.log(collapsed, type);
         }}
       >
-        <div className="demo-logo-vertical">
-          <h1 style={{color: "white", textAlign: "center", justifyContent: "center",justifyItems: "center"}}> PHUM</h1>{" "}
+        <div
+          style={{
+            color: "white",
+            textAlign: "center",
+            display: "flex",
+            justifyContent: "center",
+            justifyItems: "center",
+          }}
+        >
+          <h1> PHUM</h1>
         </div>
         <Menu
           theme="dark"
