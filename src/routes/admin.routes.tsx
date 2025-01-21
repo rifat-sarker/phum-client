@@ -42,7 +42,7 @@ export const adminPaths = [
       },
       {
         name: "Create Member",
-        path: "create-member",
+        path: "create-member",   
         element: <CreateFaculty />,
       },
     ],
