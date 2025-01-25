@@ -1,6 +1,14 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+
+import {
+  BaseQueryApi,
+  BaseQueryFn,
+  createApi,
+  FetchArgs,
+  fetchBaseQuery,
+} from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store";
 import { logout, setUser } from "../features/auth/authSlice";
+import { DirectionType } from "antd/es/config-provider";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: "http://localhost:5000/api/v1",
@@ -14,7 +22,11 @@ const baseQuery = fetchBaseQuery({
   },
 });
 
-const baseQueryWithRefreshToken = async (args, api, extraOptions) => {
+const baseQueryWithRefreshToken: BaseQueryFn<
+  FetchArgs,
+  BaseQueryApi,
+  DirectionType
+> = async (args, api, extraOptions): Promise<any> => {
   let result = await baseQuery(args, api, extraOptions);
   // console.log(result);
   if (result?.error?.status === 401) {
@@ -24,9 +36,9 @@ const baseQueryWithRefreshToken = async (args, api, extraOptions) => {
       method: "POST",
       credentials: "include",
     });
-    
+
     const data = await res.json();
-console.log(data);
+    console.log(data);
     if (data?.data?.accessToken) {
       const user = (api.getState() as RootState).auth.user;
       api.dispatch(
