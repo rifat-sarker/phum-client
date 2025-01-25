@@ -12,16 +12,14 @@ import PHInput from "../components/form/PHInput";
 const Login = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { register, handleSubmit } = useForm({
-    defaultValues: {
-      userId: "A-0001",
-      password: "rifatswd1234",
-    },
-  });
-
   const [login] = useLoginMutation();
   // console.log("data", data);
   // console.log("error", error);
+
+  const defaultValues = {
+    userId: "A-0001",
+    password: "rifatswd1234",
+  };
 
   const onSubmit = async (data: FieldValues) => {
     console.log(data);
@@ -43,13 +41,12 @@ const Login = () => {
   };
 
   return (
-    <Row justify="center" align="middle" style={{height: "100vh"}}>
-
-    <PHForm onSubmit={onSubmit}>
-      <PHInput type="text" name="userId" label="ID:" />
-      <PHInput type="text" name="password" label="Password:" />
-      <Button htmlType="submit">Login</Button>
-    </PHForm>
+    <Row justify="center" align="middle" style={{ height: "100vh" }}>
+      <PHForm onSubmit={onSubmit} defaultValues={defaultValues}>
+        <PHInput type="text" name="userId" label="ID:" />
+        <PHInput type="text" name="password" label="Password:" />
+        <Button htmlType="submit">Login</Button>
+      </PHForm>
     </Row>
   );
 };
